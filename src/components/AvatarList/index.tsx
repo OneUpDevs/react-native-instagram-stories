@@ -1,34 +1,43 @@
-import React, { FC, memo } from 'react';
-import { ScrollView } from 'react-native';
-import StoryAvatar from '../Avatar';
-import { StoryAvatarListProps } from '../../core/dto/componentsDTO';
-import { InstagramStoryProps } from '../../core/dto/instagramStoriesDTO';
+import React, { FC, memo } from "react";
+import { ScrollView } from "react-native";
+import StoryAvatar from "../Avatar";
+import { StoryAvatarListProps } from "../../core/dto/componentsDTO";
+import { InstagramStoryProps } from "../../core/dto/instagramStoriesDTO";
 
-let FlashList: any;
+let FlashList: any = null;
 
-try {
+// try {
 
-  // eslint-disable-next-line global-require
-  FlashList = require( '@shopify/flash-list' ).FlashList;
+//   // eslint-disable-next-line global-require
+//   FlashList = require( '@shopify/flash-list' ).FlashList;
 
-} catch ( error ) {
+// } catch ( error ) {
 
-  FlashList = null;
+//   FlashList = null;
 
-}
+// }
 
-const StoryAvatarList: FC<StoryAvatarListProps> = ( {
-  stories, loadingStory, seenStories, colors, seenColors, size,
-  showName, nameTextStyle, nameTextProps,
-  avatarListContainerProps, avatarListContainerStyle, avatarBorderRadius, onPress,
-} ) => {
-
-  const renderItem = ( story: InstagramStoryProps ) => (
+const StoryAvatarList: FC<StoryAvatarListProps> = ({
+  stories,
+  loadingStory,
+  seenStories,
+  colors,
+  seenColors,
+  size,
+  showName,
+  nameTextStyle,
+  nameTextProps,
+  avatarListContainerProps,
+  avatarListContainerStyle,
+  avatarBorderRadius,
+  onPress,
+}) => {
+  const renderItem = (story: InstagramStoryProps) => (
     <StoryAvatar
       {...story}
       loadingStory={loadingStory}
       seenStories={seenStories}
-      onPress={() => onPress( story.id )}
+      onPress={() => onPress(story.id)}
       colors={colors}
       seenColors={seenColors}
       size={size}
@@ -40,28 +49,32 @@ const StoryAvatarList: FC<StoryAvatarListProps> = ( {
     />
   );
 
-  if ( FlashList ) {
-
+  if (FlashList) {
     return (
       <FlashList
         horizontal
         {...avatarListContainerProps}
         data={stories}
-        renderItem={( { item } : { item: InstagramStoryProps } ) => renderItem( item )}
-        keyExtractor={( item: InstagramStoryProps ) => item.id}
+        renderItem={({ item }: { item: InstagramStoryProps }) =>
+          renderItem(item)
+        }
+        keyExtractor={(item: InstagramStoryProps) => item.id}
         contentContainerStyle={avatarListContainerStyle}
         testID="storiesList"
       />
     );
-
   }
 
   return (
-    <ScrollView horizontal {...avatarListContainerProps} contentContainerStyle={avatarListContainerStyle} testID="storiesList">
-      {stories.map( renderItem )}
+    <ScrollView
+      horizontal
+      {...avatarListContainerProps}
+      contentContainerStyle={avatarListContainerStyle}
+      testID="storiesList"
+    >
+      {stories.map(renderItem)}
     </ScrollView>
   );
-
 };
 
-export default memo( StoryAvatarList );
+export default memo(StoryAvatarList);
