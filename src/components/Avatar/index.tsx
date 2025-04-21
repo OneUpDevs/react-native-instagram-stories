@@ -1,7 +1,8 @@
 import React, { FC, memo } from 'react';
 import {
-  View, Image, Text, TouchableOpacity,
+  View, Text, TouchableOpacity,
 } from 'react-native';
+import { Image } from 'expo-image';
 import Animated, {
   useSharedValue, useAnimatedStyle, useDerivedValue, withTiming,
 } from 'react-native-reanimated';
@@ -66,10 +67,11 @@ const StoryAvatar: FC<StoryAvatarProps> = ( {
           <Loader loading={isLoading} color={loaderColor} size={size + AVATAR_OFFSET * 2} />
           <AnimatedImage
             source={avatarSource}
+            cachePolicy={'disk'}
             style={[
               AvatarStyles.avatar,
               imageAnimatedStyles,
-              { width: size, height: size, borderRadius: avatarBorderRadius ?? ( size / 2 ) },
+              { width: size, height: size, borderRadius: avatarBorderRadius ?? ( size / 2 ), paddingHorizontal:4 },
             ]}
             testID="storyAvatarImage"
             onLoad={onLoad}

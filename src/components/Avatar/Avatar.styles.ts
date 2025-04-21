@@ -5,6 +5,7 @@ export default StyleSheet.create( {
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 5,
   },
   avatar: {
     left: AVATAR_OFFSET,
