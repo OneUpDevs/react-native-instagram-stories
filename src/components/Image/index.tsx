@@ -59,15 +59,15 @@ const StoryImage: FC<StoryImageProps> = ({
       setData({ data: story, isVideo: story.mediaType === "video" });
     }
 
-    const nextStory = stories[stories.indexOf(story) + 1];
+    // const nextStory = stories[stories.indexOf(story) + 1];
 
-    if (
-      nextStory &&
-      nextStory.mediaType !== "video" &&
-      (nextStory.source as any)?.uri
-    ) {
-      Image.prefetch((nextStory.source as any)?.uri);
-    }
+    // if (
+    //   nextStory &&
+    //   nextStory.mediaType !== "video" &&
+    //   (nextStory.source as any)?.uri
+    // ) {
+    //   // Image.prefetch((nextStory.source as any)?.uri);
+    // }
   };
 
   useAnimatedReaction(

@@ -83,23 +83,7 @@ const InstagramStories = forwardRef<
     const onStoriesChange = async () => {
       seenStories.value = await (saveProgress ? getProgressStorage() : {});
 
-      const promises = stories.map((story) => {
-        const seenStoryIndex = story.stories.findIndex(
-          (item) => item.id === seenStories.value[story.id]
-        );
-        const seenStory = story.stories[seenStoryIndex + 1] || story.stories[0];
-
-        if (!seenStory) {
-          return true;
-        }
-
-        return seenStory.mediaType !== "video"
-          ? Image.prefetch((seenStory.source as any)?.uri)
-          : true;
-      });
-
-      await Promise.all(promises);
-
+      // Removed the image prefetching logic
       loadedStories.value = true;
 
       if (loadingStory.value) {
