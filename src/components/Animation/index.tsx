@@ -38,10 +38,10 @@ const StoryAnimation: FC<AnimationProps> = ( { children, x, index } ) => {
 
     return {
       transform: [
-        { perspective: WIDTH },
-        { translateX },
-        { rotateY: `${rotateY}rad` },
-        { translateX: translateX1 },
+        { perspective: WIDTH } as any,
+        { translateX } as any,
+        { rotateY: `${rotateY}rad` } as any,
+        { translateX: translateX1 } as any,
       ],
       left,
     };
