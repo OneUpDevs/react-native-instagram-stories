@@ -116,11 +116,12 @@ const StoryImage: FC<StoryImageProps> = ({
             <Image
               source={data.data.source}
               style={[{ width: WIDTH, aspectRatio: 0.5626 }, imageStyles]}
-              resizeMode="contain"
+              contentFit="contain"
               testID="storyImageComponent"
               onLayout={(e) =>
                 onImageLayout(Math.min(HEIGHT, e.nativeEvent.layout.height))
               }
+              // @ts-ignore
               onLoad={() => onContentLoad()}
               {...imageProps}
             />
